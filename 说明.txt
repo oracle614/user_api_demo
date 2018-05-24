@@ -1,0 +1,9 @@
+1. 运行Postman安装包中的Postman-win64-5.1.3-Setup.exe，安装Postman
+2. 点击启动rest接口，启动接口服务（不要关闭）
+3. 查看接口文档中的html接口文档
+4. 尝试使用Postman调试接口
+5. 尝试使用python + requests 测试接口
+
+问题：
+如果连不上接口
+请将app.run()改为app.run(port=6000)尝试，注意测试接口时端口都改为6000

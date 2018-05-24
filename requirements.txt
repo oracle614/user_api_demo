@@ -1,0 +1,4 @@
+spyne
+flask
+pymysql
+paramiko

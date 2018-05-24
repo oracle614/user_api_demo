@@ -1,0 +1,361 @@
+{
+	"id": "942b7632-004b-4e3c-90db-cfe3d1842b1a",
+	"name": "接口练习",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [
+		"28cbea03-4c03-4653-b1e6-dff99923860a",
+		"20713aba-d039-4fe0-862d-801b8ad5bb79",
+		"96497773-83fc-48e5-8e35-4d3ddbed9698",
+		"8c718db0-b665-48b7-b452-b1099e984b1a",
+		"f6c6b8f1-fc00-4d55-bbe1-4964a87de4b0",
+		"c4693cc5-d57a-4542-a132-8cbfc5691d93",
+		"8c3a9544-e7a3-48cf-bba3-2cfbf8f05baa",
+		"568904fc-76ad-438c-919c-3af69ad7f2c0"
+	],
+	"folders_order": [],
+	"folders": [],
+	"requests": [
+		{
+			"id": "20713aba-d039-4fe0-862d-801b8ad5bb79",
+			"name": "02-登录",
+			"url": "{{base_url}}/api/user/login/",
+			"description": "表单类型接口",
+			"data": [
+				{
+					"key": "name",
+					"value": "张三",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "passwd",
+					"value": "123456",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "150f3fe6-1f3b-4412-8c14-4b4f0cdcb468",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"tests[\"响应包含登录成功\"] = responseBody.has(\"登录成功\");"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "28cbea03-4c03-4653-b1e6-dff99923860a",
+			"name": "01-注册",
+			"url": "{{base_url}}/api/user/reg/",
+			"description": "REST类型接口",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": ""
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "5a522d83-1e13-4ac4-bddf-2006dd901751",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4f56a4e-cae9-4115-a34e-67e776cf28cf",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"//验证code和msg",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"响应code为100000\"] = jsonData.code === '100000';",
+							"tests[\"响应msg为成功\"] = jsonData.msg === '成功';"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\n    \"name\": \"{{name}}\",\n    \"passwd\": \"{{passwd}}\"\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "568904fc-76ad-438c-919c-3af69ad7f2c0",
+			"name": "07-删除用户",
+			"url": "http://127.0.0.1:5000/api/user/delUser/",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67af1581-9d56-4df5-925c-0cb840608474",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"//验证code和msg",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"响应code为100000\"] = jsonData.code === '100000';",
+							"tests[\"响应msg为成功\"] = jsonData.msg === '成功';"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\r\n    \"name\": \"李六\",\r\n    \"passwd\": \"123456\",\r\n    \"sign\": \"c25d81703228310dfab5e429b05053a6\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "8c3a9544-e7a3-48cf-bba3-2cfbf8f05baa",
+			"name": "06-更新用户信息",
+			"url": "http://127.0.0.1:5000/api/user/updateUser/?token=381b066e504311e8844e54ee75704366",
+			"description": "",
+			"data": [],
+			"dataMode": "raw",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "token",
+					"value": "381b066e504311e8844e54ee75704366",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed5c47b0-27a2-48cc-b543-c4be35b27b92",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"//验证code和msg",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"响应code为100000\"] = jsonData.code === '100000';",
+							"tests[\"响应msg为成功\"] = jsonData.msg === '成功';"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"rawModeData": "{\r\n    \"name\": \"李六\",\r\n    \"passwd\": \"123456\"\r\n}",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "8c718db0-b665-48b7-b452-b1099e984b1a",
+			"name": "04-上传文件",
+			"url": "{{base_url}}/api/user/uploadImage/",
+			"description": "",
+			"data": [
+				{
+					"key": "file",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "95d41ccb-19f1-4bb9-87ce-987625f36eba",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"tests[\"响应包含成功\"] = responseBody.has(\"成功\");"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "96497773-83fc-48e5-8e35-4d3ddbed9698",
+			"name": "03-登出",
+			"url": "{{base_url}}/api/user/logout/",
+			"description": "GET接口",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49102b2e-65fb-42e4-8bee-546bd0afd8e0",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"tests[\"响应包含成功\"] = responseBody.has(\"成功\");"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "c4693cc5-d57a-4542-a132-8cbfc5691d93",
+			"name": "06-获取token",
+			"url": "http://127.0.0.1:5000/api/user/getToken/?appid={{appid}}",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [
+				{
+					"key": "appid",
+					"value": "{{appid}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"auth": null,
+			"events": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "528d2968-560f-4832-8653-6afb59c7c3fc",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"tests[\"响应包含token\"] = responseBody.has(\"token\");"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "f6c6b8f1-fc00-4d55-bbe1-4964a87de4b0",
+			"name": "05-获取用户列表",
+			"url": "{{base_url}}/api/user/getUserList/",
+			"description": "",
+			"data": [],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Cookie",
+					"value": "PYSESSID=0e85ec4c-4f92-11e8-8346-54ee75704366;",
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "GET",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d4857a76-b015-4613-8cc0-dd649381571b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d67d0e4d-2ef0-4bcc-b703-93f684da251b",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"HTTP响应状态码为200\"] = responseCode.code === 200;",
+							"tests[\"响应包含用户列表\"] = responseBody.has(\"用户列表\");"
+						]
+					}
+				}
+			],
+			"folder": null,
+			"headers": "//Cookie: PYSESSID=0e85ec4c-4f92-11e8-8346-54ee75704366;\nContent-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		}
+	]
+}
