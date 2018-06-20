@@ -1,7 +1,0 @@
-create database if not exists api;
-use api;
-create table user(
-  id  int primary key auto_increment,
-  name  varchar(50), 
-  passwd varchar(100) 
-);
