@@ -2,3 +2,13 @@ spyne
 flask
 pymysql
 paramiko
+flask-session
+mysqlclient
+suds
+xlrd
+xlutils
+requests
+redis
+pytest
+pytest-html
+mkdocs
